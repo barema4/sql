@@ -21,20 +21,18 @@
       <table v-if="paginatedEmployees.length > 0">
         <thead>
           <tr class="table-header">
-            <th>ID</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Place of Birth</th>
-            <th>Salary</th>
+            <th class="header">Name</th>
+            <th class="header">Age</th>
+            <th class="header">Place of Birth</th>
+            <th class="header">Salary</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="employee in paginatedEmployees" :key="employee.id">
-            <td>{{ employee.id }}</td>
-            <td>{{ employee.name }}</td>
-            <td>{{ employee.age }}</td>
-            <td>{{ employee.placeOfBirth }}</td>
-            <td>{{ employee.salary }}</td>
+            <td class="header">{{ employee.name }}</td>
+            <td class="header">{{ employee.age }}</td>
+            <td class="header">{{ employee.placeOfBirth }}</td>
+            <td class="header">{{ employee.salary }}</td>
           </tr>
         </tbody>
       </table>
@@ -108,6 +106,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 3rem;
 }
 .table-header {
   font-size: 20px;
@@ -144,5 +143,8 @@ button {
 }
 .pages {
   padding: 31px;
+}
+.header{
+  padding-right: 2rem;
 }
 </style>
