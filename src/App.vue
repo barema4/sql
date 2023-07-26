@@ -4,7 +4,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
-    <h1>ONLINE SQL QUERY EXECUTOR</h1>
+    <h1>ONLINE SQL QUERY RUNNER</h1>
     <div class="wrapper">
       <nav>
         <RouterLink to="/">ExquteQuery</RouterLink>
