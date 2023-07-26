@@ -1,30 +1,16 @@
 <template>
   <div class="query">
     <div class="query-area">
-      <textarea v-model="query" rows="6" cols="50" id="area" placeholder="Enter your sql query here"></textarea>
-      <button @click="runQuery" id="query-button">Run Query</button>
+      <div>
+        <textarea v-model="query" rows="6" cols="50" id="area" placeholder="Enter your sql query here"></textarea>
+        <div v-if="!isQueryValid && pagedEmployees.length <= 0" class="error">Sql query  is required in the textarea</div>
+      </div>
+      <button @click="handleRunQuery" :disabled="!isQueryValid">Run Query</button>
     </div>
 
     <div v-if="employees.length > 0">
       <h2>Employees Table</h2>
-      <table>
-        <thead>
-          <tr>
-            <th class="header">Name</th>
-            <th class="header">Age</th>
-            <th class="header">Place of Birth</th>
-            <th class="header">Salary</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="employee in pagedEmployees" :key="employee.id">
-            <td class="header">{{ employee.name }}</td>
-            <td class="header">{{ employee.age }}</td>
-            <td class="header">{{ employee.placeOfBirth }}</td>
-            <td class="header">{{ employee.salary }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <ReusableTable :columns="tableColumns" :items="pagedEmployees" />
       <div class="pagination">
         <button :disabled="currentPage === 1" @click="goToPage(currentPage - 1)">Previous</button>
         <span>Page {{ currentPage }} of {{ totalPages }}</span>
@@ -33,19 +19,31 @@
         </button>
       </div>
     </div>
-    <div v-else>Please select any option to view data</div>
+    <div v-else>Run the query to view the answer</div>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import ReusableTable from './ReusableTable.vue'
 
 export default {
+  components:{
+    ReusableTable
+  },
   data() {
     return {
       ageFilter: 'all',
-      itemsPerPage: 5, 
-      currentPage: 1
+      itemsPerPage: 5,
+      currentPage: 1,
+      query: '',
+      isSubmitted: false,
+      tableColumns: [
+        { key: 'name', label: 'Name' },
+        { key: 'age', label: 'Age' },
+        { key: 'placeOfBirth', label: 'Place of Birth' },
+        { key: 'salary', label: 'Salary' },
+      ]
     }
   },
   computed: {
@@ -57,13 +55,22 @@ export default {
       const startIndex = (this.currentPage - 1) * this.itemsPerPage
       const endIndex = startIndex + this.itemsPerPage
       return this.employees.slice(startIndex, endIndex)
-    }
+    },
+    isQueryValid() {
+      return this.query.trim() !== '';
+    },
+
   },
   methods: {
     ...mapActions(['fetchEmployees']),
+    handleRunQuery() {
+      if (this.isQueryValid) {
+        this.runQuery();
+      }
+    },
     runQuery() {
       this.$store.dispatch('fetchEmployees')
-      this.currentPage = 1 
+      this.currentPage = 1
     },
     goToPage(page) {
       if (page >= 1 && page <= this.totalPages) {
@@ -79,54 +86,57 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding-right: 2rem; */
 }
+
 #query-button {
-    padding: 10px;
-    margin-top: 40px;
-    margin-left: 40px;
-    margin-right: 40px;
-    background: #ffa501;
-    border-radius: 20px;
-    border-color: #ffa501;
+  padding: 10px;
+  margin-top: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
+  background: #ffa501;
+  border-radius: 20px;
+  border-color: #ffa501;
 }
-.query-area{
+.query-area {
   border-right: 1px solid red;
-    height: 60vh;
-    margin-right: 50px;
-    padding-right: 50px;
-    display: flex;
-    flex-direction: column;
+  height: 60vh;
+  margin-right: 50px;
+  padding-right: 50px;
+  display: flex;
+  flex-direction: column;
 }
-#area{
+
+#area {
   height: 40vh;
   margin-top: 42px;
 }
-.pagination{
+.pagination {
   margin-top: 3rem;
 }
-span{
+
+span {
   padding: 10px;
 }
 
-button{
-    padding: 10px;
-    background: #ffa501;
-    border-radius: 18px;
-    font-size: 15px;
-    font-family: monospace;
-    border-color: #ffa501;
+button {
+  padding: 10px;
+  background: #ffa501;
+  border-radius: 18px;
+  font-size: 15px;
+  font-family: monospace;
+  border-color: #ffa501;
 }
-h2{
-    margin-bottom: 24px;
-    font-weight: 500;
-    color: green;
-    font-size: 22px;
-    font-family: monospace;
-    background: #ffa501;
-    text-align: center
+
+h2 {
+  margin-bottom: 24px;
+  font-weight: 500;
+  color: green;
+  font-size: 22px;
+  font-family: monospace;
+  background: #ffa501;
+  text-align: center
 }
-.header{
-  padding-right: 2rem;
+.error{
+  color: red;
 }
 </style>

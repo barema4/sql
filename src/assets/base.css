@@ -5,13 +5,11 @@
   margin: 0;
   font-weight: normal;
 }
-/* #3AAC94 */
+
 body {
   min-height: 100vh;
   margin-left: 15rem;
   margin-right: 15rem;
-  color: var(--color-text);
-  background: var(--color-background);
   transition:
     color 0.5s,
     background-color 0.5s;
