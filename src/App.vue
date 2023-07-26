@@ -1,18 +1,14 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
+    <h1>ONLINE SQL QUERY RUNNER</h1>
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/">ExquteQuery</RouterLink>
+        <RouterLink to="/predefined">PredefinedQueries</RouterLink>
       </nav>
     </div>
   </header>
@@ -21,21 +17,23 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FFA501;
+    color: green;
+    font-size: 30px;
+    font-family: monospace;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4rem;
+  font-size: 22px;
+  font-family: monospace;
 }
 
 nav a.router-link-exact-active {
@@ -54,32 +52,5 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
 }
 </style>

@@ -1,41 +1,23 @@
-# sql
+### Online Sql Query Runner
 
-This template should help get you started developing with Vue 3 in Vite.
+### What does the project do?
 
-## Recommended IDE Setup
+* The project allows one to write sql query in the textare and execute to view the data in a table
+* It also allows the user to run predefined queries by clicking on the ```predefinedquery Tab``` to view them.
+* He or she can run predefined queries by clicking on the dropdown menu to view data in a table format
+### Javascript framework used
+* I used Vue3, Vuex4, VueRouter to develop the application.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### Page Load time
+* 0.07ms 
+* I used ```Page load time plugin``` google chrome extension
+### Optimazation used.
+* Lazy loading of routes and code spliting
 
-## Customize configuration
+### How to run this Project locally
+* clone the repository by runing ```git clone https://github.com/barema4/sql.git```
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+* cd into the project `sql`
+* Run ```npm install```
+* Run ```npm run dev``` to start the server
 
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
